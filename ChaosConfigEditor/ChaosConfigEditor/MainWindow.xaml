@@ -1,0 +1,144 @@
+﻿<Window x:Class="ChaosConfigEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChaosConfigEditor"
+        mc:Ignorable="d"
+        Title="Chaos Config Editor - Full Featured" Height="800" Width="950"
+        Background="#1E2127">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate x:Key="EffectTemplate" DataType="{x:Type local:Effect}">
+            <Border BorderBrush="#40495B" BorderThickness="1" CornerRadius="3" Padding="15" Margin="0,0,0,10">
+
+                <!-- *** VISUAL FIX: The opacity style for disabled effects is restored here *** -->
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDisabled}" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Name}" Foreground="#5D88D7" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" />
+                        <TextBlock Text="Name" Foreground="LightGray" FontSize="10" />
+                        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" />
+                        <TextBlock Text="Client Event" Foreground="LightGray" FontSize="10" />
+                        <TextBox Text="{Binding ClientEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text="Weight" Foreground="LightGray" FontSize="10" />
+                                <TextBox Text="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="5,0,5,0">
+                                <TextBlock Text="Cost" Foreground="LightGray" FontSize="10" />
+                                <TextBox Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue=''}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="5,0,5,0">
+                                <TextBlock Text="Type" Foreground="LightGray" FontSize="10" />
+                                <TextBox Text="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="3" Margin="5,0,0,0">
+                                <TextBlock Text="Duration (ms)" Foreground="LightGray" FontSize="10" />
+                                <TextBox Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="Contexts" Foreground="LightGray" FontSize="10" Margin="0,10,0,3" />
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Content="any"    IsChecked="{Binding IsAnyContext, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="White"/>
+                            <CheckBox Content="car"    IsChecked="{Binding IsCarContext, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="White"/>
+                            <CheckBox Content="foot"   IsChecked="{Binding IsFootContext, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="White"/>
+                            <CheckBox Content="plane"  IsChecked="{Binding IsPlaneContext, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="White"/>
+                            <CheckBox Content="boat"   IsChecked="{Binding IsBoatContext, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,15,0" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20,0,0,0">
+                        <Button Command="{Binding DataContext.ToggleEffectCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Content" Value="Disable"/>
+                                    <Setter Property="Background" Value="#E88D5A"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="15,5"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsDisabled}" Value="True">
+                                            <Setter Property="Content" Value="Enable"/>
+                                            <Setter Property="Background" Value="#5C9E6A"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <!-- *** DELETE BUTTON FIX: The command binding now looks for the DataContext on the main Window, which is correct. *** -->
+                        <Button Content="Delete" Background="#D75E74" Foreground="White" BorderThickness="0" Padding="15,5" Margin="0,5,0,0"
+                                Command="{Binding DataContext.DeleteEffectCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2B2F3B" CornerRadius="5" Padding="10" Margin="0,0,0,15">
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Content="Save File" Command="{Binding SaveCommand}" Padding="10,5" Margin="5" Background="#5C9E6A" Foreground="White" FontWeight="Bold"/>
+                <Button Content="Add New Effect" Command="{Binding AddEffectCommand}" Padding="10,5" Margin="5" Background="#5D88D7" Foreground="White"/>
+                <Button Content="Enable All" Command="{Binding ToggleAllCommand}" CommandParameter="enable" Padding="10,5" Margin="20,5,5,5" Background="#5C9E6A" Foreground="White"/>
+                <Button Content="Disable All" Command="{Binding ToggleAllCommand}" CommandParameter="disable" Padding="10,5" Margin="5" Background="#E88D5A" Foreground="White"/>
+                <Button Content="Undo Delete" Command="{Binding UndoDeleteCommand}" Padding="10,5" Margin="20,5,5,5" Background="#7A8399" Foreground="White"/>
+            </WrapPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding EffectGroups}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:EffectGroup}">
+                        <StackPanel Margin="0,0,0,20">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding GroupName}" FontSize="22" FontWeight="Bold" Foreground="#A9B7D6" VerticalAlignment="Center"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Content="Enable Group" Command="{Binding DataContext.EnableGroupCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" Margin="5" Background="#5C9E6A" Foreground="White"/>
+                                    <Button Content="Disable Group" Command="{Binding DataContext.DisableGroupCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" Margin="5" Background="#E88D5A" Foreground="White"/>
+                                </StackPanel>
+                            </Grid>
+                            <Separator Margin="0,5,0,10" Background="#40495B"/>
+                            <ItemsControl ItemsSource="{Binding Effects}" ItemTemplate="{StaticResource EffectTemplate}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

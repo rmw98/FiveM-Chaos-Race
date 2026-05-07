@@ -1,0 +1,22 @@
+﻿<!-- File: ChaosConfigEditor.csproj (Cleaned for Costura.Fody) -->
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
+		<!-- We have removed all the PublishSingleFile settings -->
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Costura.Fody" Version="6.0.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="logo.ico" />
+	</ItemGroup>
+</Project>
