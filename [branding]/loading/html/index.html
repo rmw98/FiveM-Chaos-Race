@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chaos Race - Loading...</title>
+    <!-- We're using a Google Font for a better look -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <img src="assets/logo.png" alt="Server Logo" class="logo">
+        <h1>Hosted By Tyrone</h1>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <p id="loading-status" class="loading-status">Initializing connection...</p>
+
+        <div class="tips-container">
+            <p><strong>TIP:</strong> <span id="tip-text">Survive the chaos to win!</span></p>
+        </div>
+    </div>
+
+    <div class="music-controls">
+        <p>Music:</p>
+            <button id="volume-toggle">UNMUTE</button>
+    </div>
+
+    <!-- This is where the music lives -->
+    <audio id="bg-music" src="assets/music.ogg" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
