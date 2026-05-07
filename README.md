@@ -21,3 +21,15 @@ This project isn't just a Lua script; it's a multi-part ecosystem consisting of:
 To use this, drop `[chaos-race]` into your FiveM `server-data/resources` folder and ensure `ensure gamemanager` and `ensure chaos` are in your `server.cfg`. 
 
 *Note: Some effects require specific add-on peds/sounds (like the 'La Lamborghini' audio or custom character models). Since this is an archived dump, those external assets are not included. You will need to comment those effects out or provide the assets yourself.*
+
+List of assets used:
+Sonic Ped
+Jesse Pinkman Ped
+Tom Hanks Ped
+Walter White Ped 
+Lightning McQueen Car
+Lp700 KSI Livery Car
+Sf24 Car
+
+Xsound
+Random .ogg copy-righted sound effects i won't be providing may cause errors with missing files.
