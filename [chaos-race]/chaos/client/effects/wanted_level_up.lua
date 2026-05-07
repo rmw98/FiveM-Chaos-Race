@@ -1,0 +1,7 @@
+RegisterNetEvent('chaos:wantedLevelUp')
+AddEventHandler('chaos:wantedLevelUp', function(name, type, duration)
+    exports.chaos:AddEffectToUI(name, type, duration)
+    local currentLevel = GetPlayerWantedLevel(PlayerId())
+    SetPlayerWantedLevel(PlayerId(), currentLevel + 1, false)
+    SetPlayerWantedLevelNow(PlayerId(), false)
+end)

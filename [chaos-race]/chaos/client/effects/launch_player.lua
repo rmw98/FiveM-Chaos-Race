@@ -1,0 +1,7 @@
+RegisterNetEvent('chaos:launchPlayer')
+AddEventHandler('chaos:launchPlayer', function(name, type, duration)
+    exports.chaos:AddEffectToUI(name, type, duration)
+    local ped = PlayerPedId()
+    GiveWeaponToPed(ped, GetHashKey("GADGET_PARACHUTE"), 1, false, true)
+    ApplyForceToEntity(ped, 1, 0.0, 0.0, 135.0, 0.0, 0.0, 0.0, 0, true, true, true, false, true)
+end)

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="ghost-container">
+        <div class="panel" id="racers-panel">
+            <div class="header">TARGET RACER</div>
+            <div id="racers-list" class="list">
+                <!-- Racer items will be injected by JavaScript -->
+            </div>
+        </div>
+
+        <div class="panel" id="haunts-panel">
+            <div class="header">SELECT HAUNT</div>
+            <div id="haunts-list" class="list">
+                <!-- Haunt items will be injected by JavaScript -->
+            </div>
+        </div>
+
+        <div id="confirmation-panel">
+            <div id="selection-info">
+                <p>TARGET: <span id="selected-racer">None</span></p>
+                <p>HAUNT: <span id="selected-haunt">None</span></p>
+                <p>COST: <span id="haunt-cost">$0</span></p>
+            </div>
+            <button id="purchase-button" class="disabled">PURCHASE HAUNT</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

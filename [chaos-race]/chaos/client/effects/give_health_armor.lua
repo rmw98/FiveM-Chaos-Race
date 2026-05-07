@@ -1,0 +1,7 @@
+RegisterNetEvent('chaos:giveHealthArmor')
+AddEventHandler('chaos:giveHealthArmor', function(name, type, duration)
+    exports.chaos:AddEffectToUI(name, type, duration)
+    local playerPed = PlayerPedId()
+    SetEntityHealth(playerPed, GetEntityMaxHealth(playerPed))
+    SetPedArmour(playerPed, 100)
+end)
